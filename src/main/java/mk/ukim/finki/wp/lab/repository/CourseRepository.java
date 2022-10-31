@@ -5,8 +5,8 @@ import mk.ukim.finki.wp.lab.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+//import java.util.Optional;
+//import java.util.stream.Collectors;
 
 public class CourseRepository {
     public static List<Course> courseList = new ArrayList<>(5);
