@@ -6,13 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
 
-//    public static List<Student> studentList = new ArrayList<>(5);
+    List<Student> students = new ArrayList<>(5);
 
     //nepotrebno mozda????????????
 //    public Student saveStudent(Student s) {
