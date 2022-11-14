@@ -17,13 +17,13 @@ public class CourseRepository {
     //gi vrakja site kursevi
     public List<Course> findAllCourses() {
 //        return DataHolder.courses;
-        return courses;
+        return this.courses;
     }
 
     //go vrakja kursot so soodvetno id
     public Course findById(Long courseId) {
 //        return DataHolder.courses.stream().filter(r -> r.getCourseId().equals(courseId)).findFirst().get();
-        return courses.stream().filter(r -> r.getCourseId().equals(courseId)).findFirst().get();
+        return this.courses.stream().filter(r -> r.getCourseId().equals(courseId)).findFirst().get();
     }
 
     //?????????????????????

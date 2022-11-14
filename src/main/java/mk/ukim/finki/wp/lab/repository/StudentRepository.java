@@ -32,12 +32,12 @@ public class StudentRepository {
     //gi vrakja site studenti
     public List<Student> findAllStudents(){
 //        return studentList;
-        return DataHolder.students;
+        return this.students;
     }
 
     //gi pronaogja po ime ili prezime i gi vrakja kako kolekcija, t.e. lista
     public List<Student> findAllByNameOrSurname(String text){
-        return DataHolder.students.stream().filter(r->r.getName().contains(text)
+        return this.students.stream().filter(r->r.getName().contains(text)
                 || r.getSurname().contains(text)).collect(Collectors.toList());
     }
 }

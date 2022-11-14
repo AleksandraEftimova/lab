@@ -37,12 +37,12 @@ public class CreateStudentServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String categoryName = req.getParameter("name");
-//        String categoryDesc = req.getParameter("desc");
-//
-//        courseService.create(categoryName, categoryDesc);
-//
-//        //go redirektirame korisnikot na pocetnata strana kade se site
-//        resp.sendRedirect("/servlet/thymeleaf/category");
+        String categoryName = req.getParameter("name");
+        String categoryDesc = req.getParameter("desc");
+
+//        studentService.create(categoryName, categoryDesc);
+
+        //go redirektirame korisnikot na pocetnata strana kade se site
+        resp.sendRedirect("/servlet/thymeleaf/category");
     }
 }
