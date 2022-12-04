@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
-
-    List<Student> students = new ArrayList<>(5);
-
     //nepotrebno mozda????????????
 //    public Student saveStudent(Student s) {
 //        if (s==null || s.getName()==null || s.getName().isEmpty()) {
@@ -31,13 +28,14 @@ public class StudentRepository {
 
     //gi vrakja site studenti
     public List<Student> findAllStudents(){
-//        return studentList;
-        return this.students;
+        return DataHolder.students;
     }
 
     //gi pronaogja po ime ili prezime i gi vrakja kako kolekcija, t.e. lista
     public List<Student> findAllByNameOrSurname(String text){
-        return this.students.stream().filter(r->r.getName().contains(text)
-                || r.getSurname().contains(text)).collect(Collectors.toList());
+        return DataHolder.students
+                .stream()
+                .filter(r->r.getName().contains(text) || r.getSurname().contains(text))
+                .collect(Collectors.toList());
     }
 }

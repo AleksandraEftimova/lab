@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.bootstrap;
 
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
+import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,16 +12,20 @@ import java.util.List;
 @Component
 public class DataHolder {
 
-    public static List<Student> students = new ArrayList<>();
-    public static List<Course> courses = new ArrayList<>();
+    public static List<Student> students = new ArrayList<>(5);
+    public static List<Course> courses = new ArrayList<>(5);
 
+    public static List<Teacher> teachers = new ArrayList<>();
     @PostConstruct
     public void init() {
-        students.add(new Student("user", "pass", "name", "surname"));
-        students.add(new Student("user1", "pass1", "name1", "surname1"));
-        students.add(new Student("user2", "pass2", "name2", "surname2"));
-        students.add(new Student("user3", "pass3", "name3", "surname3"));
-        students.add(new Student("user4", "pass4", "name4", "surname4"));
+        students.add(new Student("Student1", "pass1", "name1", "surname1"));
+        students.add(new Student("Student2", "pass2", "name2", "surname2"));
+        students.add(new Student("Student3", "pass3", "name3", "surname3"));
+        students.add(new Student("Student4", "pass4", "name4", "surname4"));
+        students.add(new Student("Student5", "pass5", "name5", "surname5"));
+
+        teachers.add(new Teacher(1L, "Teacher1", "Surname1"));
+        teachers.add(new Teacher(2L, "Teacher2", "Surname2"));
 
         courses.add(new Course(1L, "Veb programiranje", "zimski predmet", students));
         courses.add(new Course(2L, "Operativni sistemi", "zimski predmet", students));
