@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="StudentListServlet", urlPatterns = "/AddStudent")
+@WebServlet(name="StudentListServlet", urlPatterns = "/addStudent")
 public class ListStudentServlet  extends HttpServlet {
 
     //zavisnosti
@@ -54,6 +54,6 @@ public class ListStudentServlet  extends HttpServlet {
 
         this.courseService.addStudentInCourse(username, courseId);
 
-        resp.sendRedirect("/StudentEnrollmentSummary");
+        resp.sendRedirect("/studentEnrollmentSummary");
     }
 }

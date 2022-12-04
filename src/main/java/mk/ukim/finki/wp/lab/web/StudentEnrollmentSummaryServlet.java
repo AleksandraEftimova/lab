@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="StudentEnrollmentSummaryServlet", urlPatterns = "/studentEnroll")
+@WebServlet(name="StudentEnrollmentSummaryServlet", urlPatterns = "/studentEnrollmentSummary")
 public class StudentEnrollmentSummaryServlet  extends HttpServlet {
 
     //zavisnosti

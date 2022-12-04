@@ -34,7 +34,7 @@ public class CreateStudentServlet  extends HttpServlet {
 
 //        context.setVariable("newStudent", this.studentService.save(req.getQueryString(), req.getQueryString(), req.getQueryString(), req.getQueryString()));
 
-        this.springTemplateEngine.process("createStudent.html",
+        this.springTemplateEngine.process("newStudent.html",
                 context, resp.getWriter());
     }
 
