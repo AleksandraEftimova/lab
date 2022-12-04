@@ -38,4 +38,20 @@ public class StudentRepository {
                 .filter(r->r.getName().contains(text) || r.getSurname().contains(text))
                 .collect(Collectors.toList());
     }
+
+    public Student findByUsername(String username) {
+        return DataHolder.students
+                .stream()
+                .filter(student -> student.getUsername().equals(username))
+                .findFirst().get();
+    }
+
+    public Student save(Student s) {
+        if (s==null || s.getName().isEmpty()) {
+            return null;
+        }
+        DataHolder.students.removeIf(r->r.getName().equals(s.getName()));
+        DataHolder.students.add(s);
+        return s;
+    }
 }

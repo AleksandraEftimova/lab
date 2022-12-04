@@ -12,4 +12,8 @@ public interface CourseService{
     Course addStudentInCourse(String username, Long courseId);
 
     Object listAll();
+
+    Course findById(Long courseId);
+
+
 }
