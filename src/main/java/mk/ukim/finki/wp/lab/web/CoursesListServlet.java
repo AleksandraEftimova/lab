@@ -36,12 +36,9 @@ public class CoursesListServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String categoryName = req.getParameter("name");
-        String categoryDesc = req.getParameter("desc");
-
-//        courseService.create(categoryName, categoryDesc);
-
-        //go redirektirame korisnikot na pocetnata strana kade se site
-        resp.sendRedirect("/servlet/thymeleaf/category");
+        String courseId = req.getParameter("courseId");
+        req.getSession().setAttribute("courseId", courseId);
+        //redirektirame kon dodavanje student
+        resp.sendRedirect("/addStudent");
     }
 }

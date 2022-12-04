@@ -29,12 +29,18 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student save(String username, String password, String name, String surname) {
-        if (username==null || password==null || name==null || surname==null) {
+//        if (username==null || password==null || name==null || surname==null) {
+//            return null;
+//        }
+//        DataHolder.students.removeIf(r->r.getUsername().equals(username));
+//        Student newStudent = new Student(username, password, name, surname);
+//        DataHolder.students.add(newStudent);
+//        return newStudent;
+        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty()) {
             return null;
         }
-        DataHolder.students.removeIf(r->r.getUsername().equals(username));
-        Student newStudent = new Student(username, password, name, surname);
-        DataHolder.students.add(newStudent);
-        return newStudent;
+        Student student = new Student(username, password, name, surname);
+        studentRepository.save(student);
+        return student;
     }
 }

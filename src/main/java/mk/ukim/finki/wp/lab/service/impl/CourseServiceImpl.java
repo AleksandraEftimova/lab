@@ -13,8 +13,11 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
 
     //dependancy injection
+    private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
-    public CourseServiceImpl(CourseRepository courseRepository) {
+
+    public CourseServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository) {
+        this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
     }
 
@@ -25,11 +28,17 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course addStudentInCourse(String username, Long courseId) {
-//        return courseRepository.addStudentToCourse(listStudentsByCourse(courseId).stream().filter(r->r.getUsername().equals(username)), courseId);
-        return null;
+        Student student = studentRepository.findByUsername(username);
+        Course course = courseRepository.findById(courseId);
+        return courseRepository.addStudentToCourse(student, course);
     }
 
     public List<Course> listAll(){
         return courseRepository.findAllCourses();
+    }
+
+    @Override
+    public Course findById(Long courseId) {
+        return courseRepository.findById(courseId);
     }
 }

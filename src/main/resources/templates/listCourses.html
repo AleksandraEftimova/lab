@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Welcome and Choose a Course</title>
@@ -8,6 +7,10 @@
             width: 800px;
             margin: auto;
         }
+
+        ul {
+            list-style-type: none;
+        }
     </style>
 </head>
 <body>
@@ -15,14 +18,18 @@
     <h1>Courses List</h1>
 </header>
 <main>
-    <h2>Choose course:</h2>
-    <input type="radio" name="courseId" value="1"> Веб програмирање<br/>
-    <input type="radio" name="courseId" value="2"> Оперативни системи<br/>
-    <input type="radio" name="courseId" value="3"> Електронска и мобилна трговија<br/>
-    <input type="radio" name="courseId" value="4"> Компјутерски мрежи<br/>
 
-    <br/>
-    <a href="/AddStudent">Submit</a>
+    <form th:method="POST" th:action="@{/listCourses}">
+        <ul>
+            <li th:each="course :  ${courses}">
+                <input type="radio" name="courseId" th:value="${course.courseId}"/>
+                <th:block th:text="${course.name}"></th:block>
+            </li>
+        </ul>
+        <br/>
+        <input type="submit" value="Add Student">
+    </form>
+
 </main>
 </body>
 </html>
