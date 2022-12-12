@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,9 @@ public class DataHolder {
         students.add(new Student("Student4", "pass4", "name4", "surname4"));
         students.add(new Student("Student5", "pass5", "name5", "surname5"));
 
-        teachers.add(new Teacher(1L, "Teacher1", "Surname1"));
-        teachers.add(new Teacher(2L, "Teacher2", "Surname2"));
+
+        teachers.add(new Teacher(1L, "Teacher1", "Surname1", LocalDate.parse("01-01-2020")));
+        teachers.add(new Teacher(2L, "Teacher2", "Surname2", LocalDate.parse("10-10-2020")));
 
         courses.add(new Course(1L, "Veb programiranje", "zimski predmet", students));
         courses.add(new Course(2L, "Operativni sistemi", "zimski predmet", students));
