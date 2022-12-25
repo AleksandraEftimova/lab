@@ -1,35 +1,58 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Welcome and Choose a Course</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
     <style type="text/css">
         body {
             width: 800px;
             margin: auto;
         }
-
-        ul {
-            list-style-type: none;
-        }
     </style>
 </head>
+
 <body>
 <header>
     <h1>Courses List</h1>
 </header>
 <main>
+    <h2>Choose course:</h2>
+    <form action="{/listCourses}" method="POST">
+        <th:block th:each="c : ${courses}">
+            <input type="radio" name="id" th:value="${c.getCourseId()}"/>
+            <th:block th:text="${c.name}"></th:block>
 
-    <form th:method="POST" th:action="@{/listCourses}">
-        <ul>
-            <li th:each="course :  ${courses}">
-                <input type="radio" name="courseId" th:value="${course.courseId}"/>
-                <th:block th:text="${course.name}"></th:block>
-            </li>
-        </ul>
-        <br/>
-        <input type="submit" value="Add Student">
+            <form>
+                <button type="submit" class="btn btn-sm btn-danger"
+                        th:method="delete" th:action="@{'/courses/delete/{id}' (id=${c.getCourseId()})}">
+                    <i class="fa fa-trash">Delete</i>
+                </button>
+                <th:block>
+                    <a class="btn btn-sm btn-info" th:href="@{'/edit-form/{id}' (id=${c.getCourseId()})}">
+                        <i class="fa fa-trash">Edit</i>
+                    </a>
+                </th:block>
+            </form>
+        </th:block>
     </form>
 
+    <!--  </td>-->
+
+    <!--  <input type="radio" name="courseId" value="1"> Веб програмирање<br/>-->
+    <!--  <input type="radio" name="courseId" value="2"> Оперативни системи<br/>-->
+    <!--  <input type="radio" name="courseId" value="3"> Електронска и мобилна трговија<br/>-->
+    <!--  <input type="radio" name="courseId" value="4"> Компјутерски мрежи<br/>-->
+
+    <br/>
+    <a href="/addStudent">Add New Student</a>
+    <a href="coursescontroller/add-form" class="btn-block btn-dark">Add New Course</a>
 </main>
 </body>
 </html>

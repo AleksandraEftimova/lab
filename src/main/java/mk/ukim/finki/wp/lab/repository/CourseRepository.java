@@ -3,16 +3,14 @@ package mk.ukim.finki.wp.lab.repository;
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
+import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Repository
 public class CourseRepository {
-//    List<Course> courses = new ArrayList<>(5);
 
     //gi vrakja site kursevi
     public List<Course> findAllCourses() {
@@ -29,35 +27,35 @@ public class CourseRepository {
 
 
     //vrakja lista studenti sto slusaat odreden kurs
-    public List<Student> findAllStudentsByCourse(Long courseId) {
+    public List<Student> findAllStudentsByCourse(Long courseId){
         return DataHolder.courses
                 .stream()
                 .filter(r->r.getCourseId().equals(courseId))
                 .findFirst().get().getStudents();
     }
 
-    //pravi dodavanje na nov student vo listata
     public Course addStudentToCourse(Student student, Course course){
-        //ako ne postoi student
-//        if (student==null || student.getName()==null || student.getName().isEmpty() || course==null){
-//            return null;
-//        }
-        //ako veke postoi studentot na toj kurs
-//        if (course.getStudents().equals(student)){
-//            return null;
-//        }
-//        Course temp = null;
-//        for (Course c : courses) {
-//            if (Objects.equals(c.getCourseId(), course.getCourseId())) {
-//                temp = c;
-//                c.getStudents().add(student);
-//            }
-//        }
-
-//        return temp;
         findById(course.getCourseId()).addStudent(student);
         return findById(course.getCourseId());
     }
 
+    public Optional<Course> save(String name, String description,
+                                 List<Teacher> teachers) {
 
+        DataHolder.courses.removeIf(r->r.getName().equals(name) || r.getDescription().equals(description));
+
+        Long courseId = DataHolder.courses
+                .stream()
+                .filter(r->r.getName().equals(name) && r.getDescription().equals(description))
+                .findFirst().get().getCourseId();
+        List<Student> students = DataHolder.students;
+
+        Course course = new Course(courseId, name, description, students, teachers);
+        DataHolder.courses.add(course);
+        return Optional.of(course);
+    }
+
+    public void deleteById(Long courseId) {
+        DataHolder.courses.removeIf(r->r.getCourseId().equals(courseId));
+    }
 }

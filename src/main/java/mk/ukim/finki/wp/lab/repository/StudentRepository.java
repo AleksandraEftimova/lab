@@ -4,7 +4,6 @@ import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Student;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,11 +45,11 @@ public class StudentRepository {
                 .findFirst().get();
     }
 
-    public Student save(Student s) {
-        if (s==null || s.getName().isEmpty()) {
+    public Student save(Student s){
+        if (s==null || s.getUsername()==null || s.getPassword()==null){
             return null;
         }
-        DataHolder.students.removeIf(r->r.getName().equals(s.getName()));
+        DataHolder.students.removeIf(r->r.getUsername().equals(s.getUsername()));
         DataHolder.students.add(s);
         return s;
     }

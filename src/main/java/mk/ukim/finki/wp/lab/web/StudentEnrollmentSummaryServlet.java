@@ -15,10 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="StudentEnrollmentSummaryServlet", urlPatterns = "/studentEnrollmentSummary")
-public class StudentEnrollmentSummaryServlet  extends HttpServlet {
+@WebServlet(name = "studentEnrollmentSummary", urlPatterns = "/studentEnrollmentSummary")
+public class StudentEnrollmentSummaryServlet extends HttpServlet {
 
-    //zavisnosti
     private final SpringTemplateEngine springTemplateEngine;
     private final StudentService studentService;
     private final CourseService courseService;
@@ -29,40 +28,33 @@ public class StudentEnrollmentSummaryServlet  extends HttpServlet {
         this.courseService = courseService;
     }
 
-
+    //da gi izlista site dodadeni studenti na daden kurs
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //vo context se site promenlivi sto ke se koristat
-//        WebContext context = new WebContext(req, resp, req.getServletContext());
-//
-//        context.setVariable("enroll", this.studentService.listAll());
-//
-//        this.springTemplateEngine.process("studentsInCourse.html",
-//                context, resp.getWriter());
-        WebContext context = new WebContext(req,resp,req.getServletContext());
-        Long courseId = null;
-        try {
-            courseId = Long.parseLong(req.getSession().getAttribute("courseId").toString());
-        } catch (Exception e) {
-            resp.sendRedirect("/listCourses");
-            return;
-        }
-        Course course = courseService.findById(courseId);
-        List<Student> students = courseService.listStudentsByCourse(courseId);
-        context.setVariable("courseName", course.getName());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+//        String courseId = req.getParameter("courseId");
+//        courseId=null;
+//        try {
+////            courseId = Long.parseLong(req.getSession().getAttribute("courseId").toString());
+//            courseId = req.getSession().getAttribute("courseId").toString();
+//        } catch (Exception e) {
+//            resp.sendRedirect("/listCourses");
+//            return;
+//        }
+//        Long courseId = null;
+//        Course course = courseService.findById(courseId);
+//        List<Student> students = courseService.listStudentsByCourse(courseId);
+        List<Student> students = studentService.listAll();
         context.setVariable("students", students);
-        this.springTemplateEngine.process("studentsInCourse.html", context, resp.getWriter());
+        List<Course> courses = courseService.listAll();
+        context.setVariable("courses", courses);
+
+        this.springTemplateEngine.process("/studentsInCourse.html", context, resp.getWriter());
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String categoryName = req.getParameter("name");
-//        String categoryDesc = req.getParameter("desc");
-//
-//        courseService.create(categoryName, categoryDesc);
-//
-//        //go redirektirame korisnikot na pocetnata strana kade se site
-//        resp.sendRedirect("/servlet/thymeleaf/category");
         super.doPost(req, resp);
     }
 }

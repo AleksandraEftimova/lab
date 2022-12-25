@@ -4,6 +4,7 @@ import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseService{
 
@@ -11,9 +12,11 @@ public interface CourseService{
 
     Course addStudentInCourse(String username, Long courseId);
 
-    Object listAll();
+    List<Course> listAll();
 
     Course findById(Long courseId);
 
+    Optional<Course> save(String name, String description, Long teacherId);
 
+    void deleteById(Long courseId);
 }

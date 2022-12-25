@@ -10,10 +10,15 @@ import java.util.List;
 
 @Repository
 public class TeacherRepository {
-//    List<Teacher> teachers = new ArrayList<>(5);
 
     public List<Teacher> findAll() {
         return DataHolder.teachers;
     }
 
+    public Teacher findById(Long id) {
+        return DataHolder.teachers
+                .stream()
+                .filter(r->r.getId().equals(id))
+                .findFirst().get();
+    }
 }

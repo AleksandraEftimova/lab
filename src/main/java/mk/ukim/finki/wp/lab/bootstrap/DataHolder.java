@@ -29,9 +29,9 @@ public class DataHolder {
         teachers.add(new Teacher(1L, "Teacher1", "Surname1", LocalDate.parse("01-01-2020")));
         teachers.add(new Teacher(2L, "Teacher2", "Surname2", LocalDate.parse("10-10-2020")));
 
-        courses.add(new Course(1L, "Veb programiranje", "zimski predmet", students));
-        courses.add(new Course(2L, "Operativni sistemi", "zimski predmet", students));
-        courses.add(new Course(3L, "Elektronska i mobilna trgovija", "zimski predmet", students));
-        courses.add(new Course(4L, "Kompjuterski mrezi", "zimski predmet", students));
+        courses.add(new Course(1L, "Veb programiranje", "zimski predmet", students, teachers));
+        courses.add(new Course(2L, "Operativni sistemi", "zimski predmet", students, teachers));
+        courses.add(new Course(3L, "Elektronska i mobilna trgovija", "zimski predmet", students, teachers));
+        courses.add(new Course(4L, "Kompjuterski mrezi", "zimski predmet", students, teachers));
     }
 }

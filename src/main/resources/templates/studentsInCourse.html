@@ -1,13 +1,32 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>
-        <html>
-        <head>
-        <meta charset="utf-8">
-    </title>
+    <meta charset="utf-8">
+    <title>WP lab - Students in Course</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
 </head>
-
 <body>
 <header>
     <h1>Students in Course </h1>
@@ -16,11 +35,11 @@
     <th:block th:text="${courseName}"></th:block>
     <ul>
         <li th:each="student : ${students}">
-            <th:block th:text="${student.name} + ${student.surname}  "></th:block>
+            <th:block th:text="${student.name} + ' ' + ${student.surname} "></th:block>
         </li>
     </ul>
     <a href="/listCourses">Back</a>
 </section>
-</body>
 
+</body>
 </html>

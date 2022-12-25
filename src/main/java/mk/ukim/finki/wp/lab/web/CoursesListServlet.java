@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="CoursesListServlet", urlPatterns = "/listCourses")
-public class CoursesListServlet  extends HttpServlet {
+@WebServlet(name = "CoursesListServlet", urlPatterns = "/listCourses")
+public class CoursesListServlet extends HttpServlet {
 
-    //zavisnosti
+    //dependency
     private final SpringTemplateEngine springTemplateEngine;
     private final CourseService courseService;
 
@@ -23,15 +23,13 @@ public class CoursesListServlet  extends HttpServlet {
         this.courseService = courseService;
     }
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //vo context se site promenlivi sto ke se koristat
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         context.setVariable("courses", this.courseService.listAll());
 
-        this.springTemplateEngine.process("listCourses.html",
-                context, resp.getWriter());
+        this.springTemplateEngine.process("/listCourses.html", context, resp.getWriter());
     }
 
     @Override

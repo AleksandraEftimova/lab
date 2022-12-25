@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@Entity
-@Table(name = "students")
+//@Entity
+//@Table(name = "students")
 public class Student {
 
     @Id

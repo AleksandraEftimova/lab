@@ -1,6 +1,6 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlet;
 
-import mk.ukim.finki.wp.lab.service.CourseService;
+import mk.ukim.finki.wp.lab.service.StudentService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -11,49 +11,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="StudentListServlet", urlPatterns = "/addStudent")
-public class ListStudentServlet  extends HttpServlet {
+@WebServlet(name = "ListStudentServlet", urlPatterns = "/addStudent")
+public class ListStudentServlet extends HttpServlet {
 
-    //zavisnosti
+    //dependency
     private final SpringTemplateEngine springTemplateEngine;
-    private final CourseService courseService;
+    private final StudentService studentService;
 
-    public ListStudentServlet(SpringTemplateEngine springTemplateEngine, CourseService courseService) {
+    public ListStudentServlet(SpringTemplateEngine springTemplateEngine, StudentService studentService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.courseService = courseService;
+        this.studentService = studentService;
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //vo context se site promenlivi sto ke se koristat
+//        PrintWriter writer = resp.getWriter();
+//        writer.write("<h1>Hello</h1>");
+//        writer.flush();
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        Long courseId = null;
-        try {
-            courseId = Long.parseLong(req.getSession().getAttribute("courseId").toString());
-        } catch (Exception e) {
-            resp.sendRedirect("/listCourses");
-            return;
-        }
-        context.setVariable("courseId", courseId);
-        context.setVariable("students", courseService.listStudentsByCourse(courseId));
+        context.setVariable("students", this.studentService.listAll());
 
-        this.springTemplateEngine.process("listStudents.html", context, resp.getWriter());
+        this.springTemplateEngine.process("/listStudents.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String categoryName = req.getParameter("name");
-//        String categoryDesc = req.getParameter("desc");
-//
-//        courseService.create(categoryName, categoryDesc);
-//
-//        //go redirektirame korisnikot na pocetnata strana kade se site
-//        resp.sendRedirect("/servlet/thymeleaf/category");
-        String username = req.getParameter("username");
-        Long courseId = (Long) req.getSession().getAttribute("courseId");
+        String studentUsername = req.getParameter("username");
+        String studentPass = req.getParameter("password");
+        String studentName = req.getParameter("name");
+        String studentSurname = req.getParameter("surname");
+        studentService.save(studentUsername, studentPass, studentName, studentSurname);
 
-        this.courseService.addStudentInCourse(username, courseId);
-
-        resp.sendRedirect("/studentEnrollmentSummary");
+        resp.sendRedirect("/addStudent");
     }
 }
