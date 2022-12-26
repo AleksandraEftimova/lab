@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.bootstrap;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.model.Teacher;
+import mk.ukim.finki.wp.lab.model.User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,9 @@ public class DataHolder {
     public static List<Course> courses = new ArrayList<>(5);
 
     public static List<Teacher> teachers = new ArrayList<>();
+
+    public static List<User> users = new ArrayList<>();
+
     @PostConstruct
     public void init() {
         students.add(new Student("Student1", "pass1", "name1", "surname1"));
