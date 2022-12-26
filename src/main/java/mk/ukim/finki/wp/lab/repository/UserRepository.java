@@ -13,6 +13,12 @@ public class UserRepository {
                 .findFirst();
     }
 
+    public Optional<User> findByUsernameAndPassword(String username, String password) {
+        return DataHolder.users.stream()
+                .filter(r->r.getUsername().equals(username) && r.getPassword().equals(password))
+                .findFirst();
+    }
+
     public User save(User user) {
         DataHolder.users.removeIf(r->r.getUsername().equals(user.getUsername()));
         DataHolder.users.add(user);

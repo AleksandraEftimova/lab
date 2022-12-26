@@ -37,5 +37,7 @@ public class DataHolder {
         courses.add(new Course(2L, "Operativni sistemi", "zimski predmet", students, teachers));
         courses.add(new Course(3L, "Elektronska i mobilna trgovija", "zimski predmet", students, teachers));
         courses.add(new Course(4L, "Kompjuterski mrezi", "zimski predmet", students, teachers));
+
+        users.add(new User("Admin", "admin", "Admin"));
     }
 }

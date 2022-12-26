@@ -5,8 +5,10 @@ import mk.ukim.finki.wp.lab.service.UserService;
 import mk.ukim.finki.wp.lab.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-public class UserServiceImpl  implements UserService {
+@Service
+public class UserServiceImpl implements UserService {
 
     //zavisnosti
     private final UserRepository userRepository;
